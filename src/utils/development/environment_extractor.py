@@ -8,12 +8,11 @@ class EnvironmentExtractor:
         "PROD",
         "PPE",
         "DR",
-        "DEV",
         "UAT",
         "SIT",
-        "OpenShift",
         "Windows 2016",
-        "Windows 2022"
+        "Windows 2022",
+        "linux"
 
     ]
 

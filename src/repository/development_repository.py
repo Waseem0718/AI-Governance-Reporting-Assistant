@@ -490,3 +490,24 @@ class DevelopmentActivityRepository:
         """)
 
         return self._fetch_all()
+    
+    def get_by_month(self, month):
+
+        self.cursor.execute("""
+
+        SELECT d.*,
+            r.report_date
+
+        FROM development_activities d
+
+        JOIN reports r
+        ON d.report_id = r.report_id
+
+        WHERE substr(r.report_date, 1, 7) = ?
+
+        ORDER BY r.report_date,
+                d.application
+
+        """, (month,))
+
+        return self._fetch_all()

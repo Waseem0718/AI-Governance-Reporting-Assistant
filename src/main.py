@@ -6,7 +6,6 @@ from repository.repository_manager import RepositoryManager
 from services.analytics.history.topic_analyzer.development_topic_analyzer import DevelopmentTopicAnalyzer
 from services.ai.prompt_builder import PromptBuilder
 from services.ai.ollama_client import OllamaClient
-IMPORT_REPORTS = True
 
 
 def main():
@@ -15,7 +14,7 @@ def main():
     # Load Emails
     # ----------------------------------------------------
 
-    loader = MsgLoader("samples/rag_reports")
+    loader = MsgLoader("samples/rag_reports_july")
 
     emails = loader.load_messages()
 
@@ -30,6 +29,7 @@ def main():
     # ----------------------------------------------------
     # Import Reports
     # ----------------------------------------------------
+    IMPORT_REPORTS = True
 
     if IMPORT_REPORTS:
 
@@ -45,50 +45,31 @@ def main():
     # Development Topic Analyzer
     # ----------------------------------------------------
 
+    REPORTING_MONTH = "2026-07"
+
     analyzer = DevelopmentTopicAnalyzer(repository)
 
-    contexts = analyzer.analyze_all()
-    """print("\n========== AI CONTEXT ==========\n")
-    
-        for context in contexts:
-    
-            print("--------------------------------------")
-    
-            print("Topic :", context["topic"])
-    
-            print()
-    
-            print("Timeline Summary")
-    
-            for key, value in context["timeline_summary"].items():
-    
-                print(f"{key:20}: {value}")
-    
-            print()
-    
-            print("Business Story")
-    
-            for story in context["business_story"]:
-    
-                print(" •", story)
-    
-            print()
-    
-            print("Current State")
-    
-            for key, value in context["current_state"].items():
-    
-                print(f"{key:20}: {value}")
-    
-            print()
-    
-            print("Business Milestones")
-    
-            for milestone in context["business_milestones"]:
-    
-                print(" •", milestone)
-    
-    """
+    contexts = analyzer.analyze_all(REPORTING_MONTH)
+    print("\n========== GENERATED AI CONTEXT ==========")
+
+    for context in contexts:
+
+        print("\n----------------------------------------")
+        print("TOPIC:", context["topic"])
+
+        print("\nTIMELINE:")
+        print(context["timeline_summary"])
+
+        print("\nBUSINESS STORY:")
+        for story in context["business_story"]:
+            print(" -", story)
+
+        print("\nCURRENT STATE:")
+        print(context["current_state"])
+
+        print("\nMILESTONES:")
+        for milestone in context["business_milestones"]:
+            print(" -", milestone)
     
     
     # ----------------------------------------------------

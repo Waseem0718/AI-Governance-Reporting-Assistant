@@ -43,6 +43,20 @@ APPLICATIONS = {
 
     "Arthaus": [
         "arthaus"
+    ],
+    "Release": [
+        "release",
+        "released"
+    ],
+
+    "Migration": [
+        "migration",
+        "migrate"
+    ],
+
+    "Deployment": [
+        "deploy",
+        "deployment"
     ]
 }
 

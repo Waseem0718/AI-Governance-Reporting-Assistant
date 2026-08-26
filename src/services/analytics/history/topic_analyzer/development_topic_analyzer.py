@@ -62,9 +62,9 @@ class DevelopmentTopicAnalyzer:
     # Analyze All Development Activities
     # -------------------------------------------------------
 
-    def analyze_all(self):
+    def analyze_all(self, month):
 
-        activities = self.repository.development_repository.get_all()
+        activities = self.repository.development_repository.get_by_month(month)
 
         extracted = []
 
